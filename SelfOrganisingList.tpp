@@ -8,20 +8,77 @@ SelfOrganisingList<T>::SelfOrganisingList(int _size) : size(_size), count(0){
 
 template<typename T>
 void SelfOrganisingList<T>::add(T value) {
-    if (count < size-1){
-        auto *tmp = new Node<T>(value);
-        tab[count++] = *tmp;
+    if (count >= size) {
+
+        return; //PELNA LISTA
     }
+
+    if (indexOf(value) != -1) {
+
+        return; //ELEMENT JUZ ISTNIEJE
+    }
+
+    tab[count++] = Node<T>(value);
+}
+
+template<typename T>
+void SelfOrganisingList<T>::addAt(T value, int idx) {
+    if (count >= size) {
+
+        return; //PELNA LISTA
+    }
+
+    if (idx < 0 || idx > count) {
+
+        return; //NIEWLASCIWY INDEX
+    }
+
+    if (indexOf(value) != -1) {
+
+        return; //ELEMENT JUZ ISTNIEJE
+    }
+
+    for (int i = count; i > idx; i--) {
+        tab[i] = tab[i - 1];
+    }
+
+    tab[idx] = Node<T>(value);
+    count++;
 }
 
 template<typename T>
 void SelfOrganisingList<T>::remove(T value) {
-    count--;
+    for (int i = 0; i < count; i++) {
+        if (tab[i].getValue() == value) {
+            for (int j = i; j < count - 1; j++) {
+                tab[j] = tab[j + 1];
+            }
+            count--;
+            tab[count] = Node<T>();
+            return;
+        }
+    }
 }
 
 template<typename T>
-void SelfOrganisingList<T>::removeAt(int index) {
-    count--;
+void SelfOrganisingList<T>::removeAt(int idx) {
+    if (idx >= 0 && idx < count) {
+        for (int i = idx; i < count - 1; i++) {
+            tab[i] = tab[i + 1];
+        }
+        count--;
+        tab[count] = Node<T>();
+    }
+}
+
+template<typename T>
+int SelfOrganisingList<T>::indexOf(T value) {
+    for (int i = 0; i < count; i++) {
+        if (tab[i].getValue() == value) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 template<typename T>
