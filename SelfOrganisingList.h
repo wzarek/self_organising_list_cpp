@@ -22,7 +22,6 @@ public:
 
     // ADD
     void add(T value);
-    void addAt(T value, int idx);
 
     // REMOVE
     void remove(T value);

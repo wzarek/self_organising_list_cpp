@@ -1,0 +1,14 @@
+//
+// Created by katan on 08/06/2023.
+//
+
+#ifndef SELF_ORGANISING_LIST_CPP_SKIPLIST_H
+#define SELF_ORGANISING_LIST_CPP_SKIPLIST_H
+
+
+class SkipList {
+
+};
+
+
+#endif //SELF_ORGANISING_LIST_CPP_SKIPLIST_H

@@ -6,46 +6,33 @@ SelfOrganisingList<T>::SelfOrganisingList(int _size) : size(_size), count(0){
     tab = new Node<T>[_size];
 }
 
+// CHECKERS
+template<typename T>
+bool SelfOrganisingList<T>::isEmpty(){
+    return count == 0;
+}
+
+template<typename T>
+bool SelfOrganisingList<T>::isFull(){
+    return count == size;
+}
+
+template<typename T>
+int SelfOrganisingList<T>::length(){
+    return count;
+}
+
+// ADDING
 template<typename T>
 void SelfOrganisingList<T>::add(T value) {
-    if (count >= size) {
+    if (count >= size) { throw std::exception(); } // todo: custom exception - list full
 
-        return; //PELNA LISTA
-    }
-
-    if (indexOf(value) != -1) {
-
-        return; //ELEMENT JUZ ISTNIEJE
-    }
+    if (indexOf(value) != -1) { throw std::exception(); } // todo: custom exception - value already exists
 
     tab[count++] = Node<T>(value);
 }
 
-template<typename T>
-void SelfOrganisingList<T>::addAt(T value, int idx) {
-    if (count >= size) {
-
-        return; //PELNA LISTA
-    }
-
-    if (idx < 0 || idx > count) {
-
-        return; //NIEWLASCIWY INDEX
-    }
-
-    if (indexOf(value) != -1) {
-
-        return; //ELEMENT JUZ ISTNIEJE
-    }
-
-    for (int i = count; i > idx; i--) {
-        tab[i] = tab[i - 1];
-    }
-
-    tab[idx] = Node<T>(value);
-    count++;
-}
-
+// DELETION
 template<typename T>
 void SelfOrganisingList<T>::remove(T value) {
     for (int i = 0; i < count; i++) {
@@ -67,19 +54,27 @@ void SelfOrganisingList<T>::removeAt(int idx) {
             tab[i] = tab[i + 1];
         }
         count--;
-        tab[count] = Node<T>();
+        tab[--count] = Node<T>();
     }
 }
 
+// GETTERS
 template<typename T>
 int SelfOrganisingList<T>::indexOf(T value) {
     for (int i = 0; i < count; i++) {
-        if (tab[i].getValue() == value) {
-            return i;
-        }
+        if (tab[i].getValue() == value) { return i; }
     }
     return -1;
 }
+
+template<typename T>
+T SelfOrganisingList<T>::valueAt(int idx){
+    if (idx >= count) { throw std::exception(); } // todo: custom exception
+
+
+}
+
+// OPERATOR OVERLOADING
 
 template<typename T>
 Node<T> &SelfOrganisingList<T>::operator[](const int &idx) {
