@@ -38,36 +38,23 @@ void BaseList<T>::add(T value) {
 // DELETION
 template<typename T>
 void BaseList<T>::remove(T value) {
-    for (int i = 0; i < count; i++) {
-        if (tab[i].getValue() == value) {
-            for (int j = i; j < count - 1; j++) {
-                tab[j] = tab[j + 1];
-            }
-            count--;
-            tab[count] = Node<T>();
-            return;
-        }
-    }
+    removeAt(indexOf(value));
 }
 
 template<typename T>
 void BaseList<T>::removeAt(int idx) {
-    if (idx >= 0 && idx < count) {
-        for (int i = idx; i < count - 1; i++) {
-            tab[i] = tab[i + 1];
-        }
-        count--;
-        tab[--count] = Node<T>();
+    if (idx < 0 || idx >= count) { throw std::exception(); } // todo: throw an out of range exception
+
+    for (int i = idx; i < count - 1; i++) {
+        tab[i] = tab[i + 1];
     }
+
+    count--;
 }
 
 template<typename T>
 void BaseList<T>::clear(){
     if (count == 0) { return; }
-
-    for (int i = 0; i < count; i++) {
-        delete tab[i];
-    }
 
     count = 0;
 }
@@ -89,7 +76,6 @@ T BaseList<T>::valueAt(int idx){
 }
 
 // RESIZING
-
 template<typename T>
 void BaseList<T>::resize(){
     auto *tmpTab = new Node<T>[size*2];
@@ -104,8 +90,9 @@ void BaseList<T>::resize(){
 }
 
 // OPERATOR OVERLOADING
-
 template<typename T>
 Node<T> &BaseList<T>::operator[](const int &idx) {
+    if (idx >= size) { throw std::exception(); } // todo: custom exception
+
     return tab[idx];
 }
