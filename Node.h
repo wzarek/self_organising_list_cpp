@@ -12,6 +12,7 @@ class Node{
 
 public:
     Node(T val) : value(val){}
+    Node(const Node<T> &other);
     Node();
 
     T getValue();

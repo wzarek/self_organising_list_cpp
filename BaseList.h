@@ -13,8 +13,10 @@ protected:
     int size;
     int count;
 
+    void resize();
+
 public:
-    explicit BaseList(int _size);
+    explicit BaseList(int _size = 32);
 
     // CHECK
     bool isEmpty();

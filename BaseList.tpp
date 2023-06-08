@@ -27,7 +27,7 @@ int BaseList<T>::length(){
 // ADDING
 template<typename T>
 void BaseList<T>::add(T value) {
-    if (count >= size) { throw std::exception(); } // todo: custom exception - list full
+    if (count >= size) { resize(); }
 
     if (indexOf(value) != -1) { throw std::exception(); } // todo: custom exception - value already exists
 
@@ -71,9 +71,24 @@ int BaseList<T>::indexOf(T value) {
 
 template<typename T>
 T BaseList<T>::valueAt(int idx){
-    if (idx >= count) { throw std::exception(); } // todo: custom exception
+    if (idx >= size) { throw std::exception(); } // todo: custom exception
 
+    return tab[idx];
+}
 
+// RESIZING
+
+template<typename T>
+void BaseList<T>::resize(){
+    auto *tmpTab = new Node<T>[size*2];
+
+    for (int i = 0; i < size; i++){
+        tmpTab[i] = tab[i];
+    }
+    delete []tab;
+
+    tab = tmpTab;
+    size *= 2;
 }
 
 // OPERATOR OVERLOADING
