@@ -5,6 +5,7 @@
 
 template<typename T>
 BaseList<T>::BaseList(int _size) : size(_size), count(0){
+    if (_size == 0) { throw std::exception(); } // todo: throw an error that size cannot be 0
     tab = new Node<T>[_size];
 }
 
@@ -58,6 +59,17 @@ void BaseList<T>::removeAt(int idx) {
         count--;
         tab[--count] = Node<T>();
     }
+}
+
+template<typename T>
+void BaseList<T>::clear(){
+    if (count == 0) { return; }
+
+    for (int i = 0; i < count; i++) {
+        delete tab[i];
+    }
+
+    count = 0;
 }
 
 // GETTERS
