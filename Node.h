@@ -15,13 +15,13 @@ public:
     Node();
 
     T getValue();
-    friend bool operator < (const Node<T>& f, const Node<T>& other);
-    friend bool operator <= (const Node<T>& f, const Node<T>& other);
-    friend bool operator > (const Node<T>& f, const Node<T>& other);
-    friend bool operator >= (const Node<T>& f, const Node<T>& other);
-    friend bool operator == (const Node<T>& f, const Node<T>& other);
-    friend bool operator != (const Node<T>& f, const Node<T>& other);
-    friend std::ostream &operator << (std::ostream &os, const Node<T> &node);
+//    friend bool operator < (const Node<T>& f, const Node<T>& other);
+//    friend bool operator <= (const Node<T>& f, const Node<T>& other);
+//    friend bool operator > (const Node<T>& f, const Node<T>& other);
+//    friend bool operator >= (const Node<T>& f, const Node<T>& other);
+//    friend bool operator == (const Node<T>& f, const Node<T>& other);
+//    friend bool operator != (const Node<T>& f, const Node<T>& other);
+//    friend std::ostream &operator << (std::ostream &os, const Node<T> &node);
 };
 
 #include "Node.tpp"

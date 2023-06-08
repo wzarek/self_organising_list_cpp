@@ -1,18 +1,16 @@
 #include <iostream>
-#include "Node.h"
-#include "SelfOrganisingList.h"
+#include "SkipList.h"
 
 
 int main() {
-    SelfOrganisingList<int> s(5);
+    SkipList<int> s(5);
 
     s.add(1);
-    s.add(1);
+    s.add(3);
     s.add(2);
     s.remove(2);
-    s.addAt(2,0);
-    std::cout << s[0].getValue() << s[1].getValue() << s[2].getValue() <<s[3].getValue() <<s[4].getValue()<< "\n";
+    std::cout << s[0].getValue() << "\t" << s[1].getValue() << "\n";
     s.remove(1);
-    std::cout << s[0].getValue() << s[1].getValue() << s[2].getValue()<<s[3].getValue() <<s[4].getValue();
+    std::cout << s[0].getValue();
     return 0;
 }
