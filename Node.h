@@ -11,9 +11,10 @@ class Node{
     int accessCounter;
 
 public:
-    Node(T val) : value(val){}
+    explicit Node(T val) : value(val), accessCounter(0){}
     Node(const Node<T> &other);
     Node();
+    ~Node()= default;
 
     T getValue();
 //    friend bool operator < (const Node<T>& f, const Node<T>& other);
