@@ -3,3 +3,8 @@
 //
 
 #include "SkipList.h"
+
+template<typename T>
+SkipList<T>::SkipList(int _size):BaseList<T>(_size) {
+
+}
