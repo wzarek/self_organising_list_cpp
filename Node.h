@@ -4,17 +4,15 @@
 #pragma once
 #ifndef SELF_ORGANISING_LIST_CPP_NODE_H
 #define SELF_ORGANISING_LIST_CPP_NODE_H
-
 template<typename T>
 class Node{
-    T value;
-    int accessCounter;
-
 public:
+    T value;
     Node(T val) : value(val){}
     Node();
-
+    int accessCounter;
     T getValue();
+<<<<<<< Updated upstream
     friend bool operator < (const Node<T>& f, const Node<T>& other);
     friend bool operator <= (const Node<T>& f, const Node<T>& other);
     friend bool operator > (const Node<T>& f, const Node<T>& other);
@@ -23,6 +21,17 @@ public:
     friend bool operator != (const Node<T>& f, const Node<T>& other);
     friend std::ostream &operator << (std::ostream &os, const Node<T> &node);
 };
+=======
+};
+//    friend bool operator < (const Node<T>& f, const Node<T>& other);
+//    friend bool operator <= (const Node<T>& f, const Node<T>& other);
+//    friend bool operator > (const Node<T>& f, const Node<T>& other);
+//    friend bool operator >= (const Node<T>& f, const Node<T>& other);
+//    friend bool operator == (const Node<T>& f, const Node<T>& other);
+//    friend bool operator != (const Node<T>& f, const Node<T>& other);
+//    friend std::ostream &operator << (std::ostream &os, const Node<T> &node);
+
+>>>>>>> Stashed changes
 
 #include "Node.tpp"
 #endif //SELF_ORGANISING_LIST_CPP_NODE_H
