@@ -9,9 +9,13 @@ template<typename T>
 SkipList<T>::SkipList(int _size) : BaseList<T>(_size) {}
 
 template<typename T>
-void SkipList<T>::insert(T value) {
+void SkipList<T>::add(T value) {
     if (this->indexOf(value) != -1) {
         throw std::exception();
+    }
+  
+    if (this->count >= this->size) {
+        BaseList<T>::resize();
     }
 
     // Create a new node
