@@ -96,3 +96,12 @@ Node<T> &BaseList<T>::operator[](const int &idx) {
 
     return tab[idx];
 }
+
+template<typename T>
+std::ostream &operator<<(std::ostream &o, BaseList<T> &list) {
+    for (int i=0; i<list.count; i++){
+        o << list[i].getValue() << "\t";
+    }
+
+    return o;
+}

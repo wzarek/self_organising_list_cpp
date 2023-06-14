@@ -14,3 +14,13 @@ template<typename T>
 T Node<T>::getValue() {
     return value;
 }
+
+template<typename T>
+int Node<T>::getCounter() {
+    return accessCounter;
+}
+
+template<typename T>
+void Node<T>::incrementCounter() {
+    accessCounter++;
+}

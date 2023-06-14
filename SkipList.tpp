@@ -11,7 +11,7 @@ SkipList<T>::SkipList(int _size) : BaseList<T>(_size) {}
 template<typename T>
 void SkipList<T>::insert(T value) {
     if (this->count >= this->size) {
-        throw std::exception(); // todo: custom exception - list full
+        BaseList<T>::resize();
     }
 
     if (this->indexOf(value) != -1) {
@@ -35,8 +35,8 @@ void SkipList<T>::insert(T value) {
         this->count = level;
     } else {
         for (int i = 0; i < level; i++) {
-            this->tab[i].accessCounter++;
-            if (i < this->count && this->tab[i].accessCounter >= 2) {
+            this->tab[i].incrementCounter();
+            if (i < this->count && this->tab[i].getCounter() >= 2) {
                 this->tab[i] = newNode;
             }
         }
@@ -47,7 +47,7 @@ template<typename T>
 bool SkipList<T>::search(T value) {
     for (int i = 0; i < this->count; i++) {
         if (this->tab[i].getValue() == value) {
-            this->tab[i].accessCounter++;
+            this->tab[i].incrementCounter();
             return true;
         }
     }
