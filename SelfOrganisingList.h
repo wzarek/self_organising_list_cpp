@@ -11,6 +11,11 @@ class SelfOrganisingList : public BaseList<T>{
 public:
     explicit SelfOrganisingList(int _size);
 
+    void reorganiseUp(const int& idx);
+
+    // overriding
+    int indexOf(T value);
+    T valueAt(int idx);
     Node<T>& operator[](const int& idx);
 };
 

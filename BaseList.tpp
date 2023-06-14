@@ -43,7 +43,7 @@ void BaseList<T>::remove(T value) {
 
 template<typename T>
 void BaseList<T>::removeAt(int idx) {
-    if (idx < 0 || idx >= count) { throw std::exception(); } // todo: throw an out of range exception
+    if (idx < 0 || idx >= count) { throw std::out_of_range("Index out of range"); }
 
     for (int i = idx; i < count - 1; i++) {
         tab[i] = tab[i + 1];
@@ -53,7 +53,7 @@ void BaseList<T>::removeAt(int idx) {
 }
 
 template<typename T>
-void BaseList<T>::clear(){
+void BaseList<T>::clear() {
     if (count == 0) { return; }
 
     count = 0;
@@ -69,15 +69,15 @@ int BaseList<T>::indexOf(T value) {
 }
 
 template<typename T>
-T BaseList<T>::valueAt(int idx){
-    if (idx >= size) { throw std::exception(); } // todo: custom exception
+T BaseList<T>::valueAt(int idx) {
+    if (idx >= count || idx < 0) { throw std::out_of_range("Index out of range"); }
 
     return tab[idx];
 }
 
 // RESIZING
 template<typename T>
-void BaseList<T>::resize(){
+void BaseList<T>::resize() {
     auto *tmpTab = new Node<T>[size*2];
 
     for (int i = 0; i < size; i++){
@@ -92,7 +92,7 @@ void BaseList<T>::resize(){
 // OPERATOR OVERLOADING
 template<typename T>
 Node<T> &BaseList<T>::operator[](const int &idx) {
-    if (idx >= size) { throw std::exception(); } // todo: custom exception
+    if (idx >= count || idx < 0) { throw std::out_of_range("Index out of range"); }
 
     return tab[idx];
 }

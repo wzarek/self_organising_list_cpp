@@ -10,18 +10,42 @@ SelfOrganisingList<T>::SelfOrganisingList(int _size) : BaseList<T>(_size){
 }
 
 template<typename T>
-Node<T>& SelfOrganisingList<T>::operator[](const int& idx) {
-    if (idx >= 0 && idx < BaseList<T>::count) {
-        BaseList<T>::tab[idx].increaseCounter(); // INCREMENT COUNTER
+void SelfOrganisingList<T>::reorganiseUp(const int &idx) {
+    if (idx < 0 || idx >= BaseList<T>::count) { throw std::out_of_range("Index out of range"); }
 
-        for (int i = idx; i > 0; i--) {
-            if (BaseList<T>::tab[i - 1].getCounter() >= BaseList<T>::tab[i].getCounter())
-                break; // CHECK IF THE ELEMENT COUNTER IS LESS THAN CURRENT COUNTER
-
-            std::swap(BaseList<T>::tab[i], BaseList<T>::tab[i - 1]); // SWAP ELEMENTS
-        }
-
-        return BaseList<T>::tab[idx];
+    for (int i = idx; i > 0 && BaseList<T>::tab[i - 1].getCounter() < BaseList<T>::tab[i].getCounter(); i--) {
+        std::swap(BaseList<T>::tab[i], BaseList<T>::tab[i - 1]);
     }
-    throw std::out_of_range("Index out of range"); // THROW EXCEPTION IF INDEX IS OUT OF RANGE
+}
+
+template<typename T>
+int SelfOrganisingList<T>::indexOf(T value) {
+    for (int i = 0; i < BaseList<T>::count; i++) {
+        if (BaseList<T>::tab[i].getValue() == value) {
+            BaseList<T>::tab[i].increaseCounter();
+            reorganiseUp(i);
+            return i;
+        }
+    }
+    return -1;
+}
+
+template<typename T>
+T SelfOrganisingList<T>::valueAt(int idx) {
+    if (idx >= BaseList<T>::count || idx < 0) { throw std::out_of_range("Index out of range"); }
+
+    BaseList<T>::tab[idx].increaseCounter();
+    reorganiseUp(idx);
+
+    return BaseList<T>::tab[idx];
+}
+
+template<typename T>
+Node<T>& SelfOrganisingList<T>::operator[](const int& idx) {
+    if (idx < 0 || idx >= BaseList<T>::count) { throw std::out_of_range("Index out of range"); }
+
+    BaseList<T>::tab[idx].increaseCounter();
+    reorganiseUp(idx);
+
+    return BaseList<T>::tab[idx];
 }
