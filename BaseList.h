@@ -22,6 +22,7 @@ public:
     bool isEmpty();
     bool isFull();
     int length();
+    virtual bool search(T value) = 0;
 
     // ADD
     void add(T value);

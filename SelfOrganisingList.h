@@ -14,6 +14,7 @@ public:
     void reorganiseUp(const int& idx);
 
     // overriding
+    bool search(T value);
     int indexOf(T value);
     T valueAt(int idx);
     Node<T>& operator[](const int& idx);

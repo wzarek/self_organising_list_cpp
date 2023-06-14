@@ -1,32 +1,41 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
+#include <iostream>
 #include "SkipList.h"
 #include "Timer.h"
+#include "SelfOrganisingList.h"
 
+template<typename T>
+void searchFromFile(BaseList<T> &list, const std::string &filepath){
+    std::ifstream file;
+    file.open(filepath);
+
+    if (!file.is_open()) {
+        std::cout << "Failed to open the file." << std::endl;
+        return;
+    }
+
+    T singleLine;
+    while (file >> singleLine) {
+        list.search(singleLine);
+    }
+
+    file.close();
+}
 
 int main() {
     Timer t;
-    SkipList<int> skipList(10);
+    SelfOrganisingList<int> soList(1000);
 
-    // Insert elements into the skip list
-    skipList.insert(5);
-    skipList.insert(10);
-    skipList.insert(3);
-    skipList.insert(8);
-
-    std::cout << skipList << "\n";
-
-    // Search for elements in the skip list
-    int value = 4;
-    t.start();
-    bool found = skipList.search(value);
-    t.stop();
-    if (found) {
-        std::cout << "Element " << value << " jest w skip liscie." << std::endl;
-    } else {
-        std::cout << "Element " << value << " nie znaleziony." << std::endl;
+    for (int i=1; i<=100; i++){
+        soList.add(i);
     }
-    std::cout << "trwalo " << std::fixed << std::setprecision(10) << t.elapsedMilliseconds() << " ms";
 
+    t.start();
+    searchFromFile(soList, "./tests/500_unique_1to1000_read.in");
+    t.stop();
+
+    std::cout << "trwalo " << std::fixed << std::setprecision(10) << t.elapsedMicroseconds() << " microseconds";
     return 0;
 }

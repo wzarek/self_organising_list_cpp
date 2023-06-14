@@ -13,7 +13,7 @@ public:
     explicit SkipList(int _size);
 
     // INSERT
-    void insert(T value);
+    void add(T value);
 
     // SEARCH
     bool search(T value);
