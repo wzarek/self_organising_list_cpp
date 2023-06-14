@@ -3,16 +3,7 @@
 
 
 int main() {
-    SelfOrganisingList<int> s(5);
-
-    s.add(1);
-    s.add(3);
-    s.add(2);
-    std::cout << s[0].getValue() << "\t" << s[1].getValue() << "\t" << s[2].getValue() << "\n";
-    s.remove(2);
-    std::cout << s[0].getValue() << "\t" << s[1].getValue() << "\n";
-    s.remove(1);
-    SkipList<int> skipList(10); // Specify the maximum size of the skip list
+    SkipList<int> skipList(10);
 
     // Insert elements into the skip list
     skipList.insert(5);
@@ -20,8 +11,10 @@ int main() {
     skipList.insert(3);
     skipList.insert(8);
 
+    std::cout << skipList << "\n";
+
     // Search for elements in the skip list
-    int value = 3;
+    int value = 4;
     bool found = skipList.search(value);
     if (found) {
         std::cout << "Element " << value << " jest w skip liscie." << std::endl;

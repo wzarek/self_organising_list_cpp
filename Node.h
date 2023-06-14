@@ -18,6 +18,8 @@ public:
     ~Node() = default;
   
     T getValue();
+    int getCounter();
+    void incrementCounter();
 //    friend bool operator < (const Node<T>& f, const Node<T>& other);
 //    friend bool operator <= (const Node<T>& f, const Node<T>& other);
 //    friend bool operator > (const Node<T>& f, const Node<T>& other);
