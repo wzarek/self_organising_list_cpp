@@ -10,12 +10,12 @@ SkipList<T>::SkipList(int _size) : BaseList<T>(_size) {}
 
 template<typename T>
 void SkipList<T>::add(T value) {
+    if (this->indexOf(value) != -1) {
+        throw std::exception();
+    }
+  
     if (this->count >= this->size) {
         BaseList<T>::resize();
-    }
-
-    if (this->indexOf(value) != -1) {
-        throw std::exception(); // todo: custom exception - value already exists
     }
 
     // Create a new node
@@ -28,24 +28,35 @@ void SkipList<T>::add(T value) {
     }
 
     // Create/update the levels in the skip list
-    if (level > this->count) {
-        for (int i = this->count; i < level; i++) {
-            this->tab[i] = newNode;
-        }
-        this->count = level;
-    } else {
-        for (int i = 0; i < level; i++) {
-            this->tab[i] = newNode;
-        }
+    for (int i = 0; i < level; i++) {
+        this->tab[i] = newNode;
     }
 }
 
 template<typename T>
 bool SkipList<T>::search(T value) {
-    for (int i = 0; i < this->count; i++) {
-        if (this->tab[i].getValue() == value) {
-            return true;
+    int currentLevel = this->count - 1; // Start from the highest level
+
+    while (currentLevel >= 0) {
+        if (this->tab[currentLevel].getValue() == value) {
+            return true; // Found the value at the current level
+        }
+
+        if (currentLevel == 0 || this->tab[currentLevel].getValue() > value) {
+            // Move down to the next level
+            currentLevel--;
+        } else {
+            // Skip to the next relevant node at the current level
+            int nextIndex = this->tab[currentLevel].getNextIndex();
+            if (nextIndex != -1 && this->tab[nextIndex].getValue() <= value) {
+                // Make the skip
+                currentLevel = nextIndex;
+            } else {
+                // Move down to the next level
+                currentLevel--;
+            }
         }
     }
-    return false;
+
+    return false; // Value not found in the skip list
 }
