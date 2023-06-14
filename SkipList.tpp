@@ -1,3 +1,7 @@
+//
+// Created by katan on 08/06/2023.
+//
+#pragma once
 #include "SkipList.h"
 #include <random>
 

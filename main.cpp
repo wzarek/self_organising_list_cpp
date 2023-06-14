@@ -1,21 +1,16 @@
 #include <iostream>
-#include "Node.h"
-#include "SelfOrganisingList.h"
+#include "SkipList.h"
 
 
 int main() {
-<<<<<<< Updated upstream
     SelfOrganisingList<int> s(5);
 
     s.add(1);
-    s.add(1);
+    s.add(3);
     s.add(2);
     s.remove(2);
-    s.addAt(2,0);
-    std::cout << s[0].getValue() << s[1].getValue() << s[2].getValue() <<s[3].getValue() <<s[4].getValue()<< "\n";
+    std::cout << s[0].getValue() << "\t" << s[1].getValue() << "\n";
     s.remove(1);
-    std::cout << s[0].getValue() << s[1].getValue() << s[2].getValue()<<s[3].getValue() <<s[4].getValue();
-=======
     SkipList<int> skipList(10); // Specify the maximum size of the skip list
 
     // Insert elements into the skip list
@@ -33,6 +28,5 @@ int main() {
         std::cout << "Element " << value << " nie znaleziony." << std::endl;
     }
 
->>>>>>> Stashed changes
     return 0;
 }
