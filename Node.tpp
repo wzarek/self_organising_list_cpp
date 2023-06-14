@@ -24,3 +24,8 @@ template<typename T>
 void Node<T>::incrementCounter() {
     accessCounter++;
 }
+
+template<typename T>
+int Node<T>::getNextIndex() const {
+    return nextIndex;
+}
