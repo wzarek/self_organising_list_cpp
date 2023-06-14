@@ -3,14 +3,7 @@
 
 
 int main() {
-    SelfOrganisingList<int> s(5);
 
-    s.add(1);
-    s.add(3);
-    s.add(2);
-    s.remove(2);
-    std::cout << s[0].getValue() << "\t" << s[1].getValue() << "\n";
-    s.remove(1);
     SkipList<int> skipList(10); // Specify the maximum size of the skip list
 
     // Insert elements into the skip list

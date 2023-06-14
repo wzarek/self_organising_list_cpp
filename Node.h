@@ -12,8 +12,12 @@ public:
     T value;
     Node(T val) : value(val){}
     Node();
-    int accessCounter;
+    int getNextIndex() const {
+        return nextIndex;
+    }
     T getValue();
+private:
+    int nextIndex;
 //    friend bool operator < (const Node<T>& f, const Node<T>& other);
 //    friend bool operator <= (const Node<T>& f, const Node<T>& other);
 //    friend bool operator > (const Node<T>& f, const Node<T>& other);
