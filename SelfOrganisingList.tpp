@@ -1,6 +1,7 @@
 #pragma once
 
 #include <exception>
+#include <stdexcept>
 #include "SelfOrganisingList.h"
 
 template<typename T>
@@ -10,20 +11,17 @@ SelfOrganisingList<T>::SelfOrganisingList(int _size) : BaseList<T>(_size){
 
 template<typename T>
 Node<T>& SelfOrganisingList<T>::operator[](const int& idx) {
-    if (idx >= 0 && idx < count) {
-        count++; // INCREMENT COUNTER
+    if (idx >= 0 && idx < BaseList<T>::count) {
+        BaseList<T>::tab[idx].increaseCounter(); // INCREMENT COUNTER
 
         for (int i = idx; i > 0; i--) {
-            if (!tab[i - 1].exists())
-                break; // CHECK IF PREVIOUS ELEMENT EXISTS
-
-            if (tab[i - 1].getCounter() >= count)
+            if (BaseList<T>::tab[i - 1].getCounter() >= BaseList<T>::tab[i].getCounter())
                 break; // CHECK IF THE ELEMENT COUNTER IS LESS THAN CURRENT COUNTER
 
-            std::swap(tab[i], tab[i - 1]); // SWAP ELEMENTS
+            std::swap(BaseList<T>::tab[i], BaseList<T>::tab[i - 1]); // SWAP ELEMENTS
         }
 
-        return tab[idx];
+        return BaseList<T>::tab[idx];
     }
     throw std::out_of_range("Index out of range"); // THROW EXCEPTION IF INDEX IS OUT OF RANGE
 }

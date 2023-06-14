@@ -13,8 +13,10 @@ protected:
     int size;
     int count;
 
+    void resize();
+
 public:
-    explicit BaseList(int _size);
+    explicit BaseList(int _size = 32);
 
     // CHECK
     bool isEmpty();
@@ -33,6 +35,9 @@ public:
     T valueAt(int idx);
     int indexOf(T value);
     Node<T>& operator[](const int &idx);
+
+    // OPERATOR OVERLOADING
+    template<typename U> friend std::ostream& operator <<(std::ostream &o, BaseList<U> &list);
 };
 
 #include "BaseList.tpp"

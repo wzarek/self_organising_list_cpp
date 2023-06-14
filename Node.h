@@ -8,12 +8,18 @@
 
 template<typename T>
 class Node{
+  T value;
+  int accessCounter;
+  
 public:
-    T value;
-    Node(T val) : value(val){}
+    explicit Node(T val) : value(val), accessCounter(0){}
+    Node(const Node<T> &other);
     Node();
-    int accessCounter;
+    ~Node() = default;
+  
     T getValue();
+    int getCounter();
+    void incrementCounter();
 //    friend bool operator < (const Node<T>& f, const Node<T>& other);
 //    friend bool operator <= (const Node<T>& f, const Node<T>& other);
 //    friend bool operator > (const Node<T>& f, const Node<T>& other);
