@@ -10,6 +10,8 @@ template<typename T>
 class SelfOrganisingList : public BaseList<T>{
 public:
     explicit SelfOrganisingList(int _size);
+
+    Node<T>& operator[](const int& idx);
 };
 
 #include "SelfOrganisingList.tpp"

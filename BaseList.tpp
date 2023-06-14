@@ -5,6 +5,7 @@
 
 template<typename T>
 BaseList<T>::BaseList(int _size) : size(_size), count(0){
+    if (_size == 0) { throw std::exception(); } // todo: throw an error that size cannot be 0
     tab = new Node<T>[_size];
 }
 
@@ -27,7 +28,7 @@ int BaseList<T>::length(){
 // ADDING
 template<typename T>
 void BaseList<T>::add(T value) {
-    if (count >= size) { throw std::exception(); } // todo: custom exception - list full
+    if (count >= size) { resize(); }
 
     if (indexOf(value) != -1) { throw std::exception(); } // todo: custom exception - value already exists
 
@@ -37,27 +38,25 @@ void BaseList<T>::add(T value) {
 // DELETION
 template<typename T>
 void BaseList<T>::remove(T value) {
-    for (int i = 0; i < count; i++) {
-        if (tab[i].getValue() == value) {
-            for (int j = i; j < count - 1; j++) {
-                tab[j] = tab[j + 1];
-            }
-            count--;
-            tab[count] = Node<T>();
-            return;
-        }
-    }
+    removeAt(indexOf(value));
 }
 
 template<typename T>
 void BaseList<T>::removeAt(int idx) {
-    if (idx >= 0 && idx < count) {
-        for (int i = idx; i < count - 1; i++) {
-            tab[i] = tab[i + 1];
-        }
-        count--;
-        tab[--count] = Node<T>();
+    if (idx < 0 || idx >= count) { throw std::exception(); } // todo: throw an out of range exception
+
+    for (int i = idx; i < count - 1; i++) {
+        tab[i] = tab[i + 1];
     }
+
+    count--;
+}
+
+template<typename T>
+void BaseList<T>::clear(){
+    if (count == 0) { return; }
+
+    count = 0;
 }
 
 // GETTERS
@@ -71,14 +70,38 @@ int BaseList<T>::indexOf(T value) {
 
 template<typename T>
 T BaseList<T>::valueAt(int idx){
-    if (idx >= count) { throw std::exception(); } // todo: custom exception
+    if (idx >= size) { throw std::exception(); } // todo: custom exception
 
+    return tab[idx];
+}
 
+// RESIZING
+template<typename T>
+void BaseList<T>::resize(){
+    auto *tmpTab = new Node<T>[size*2];
+
+    for (int i = 0; i < size; i++){
+        tmpTab[i] = tab[i];
+    }
+    delete []tab;
+
+    tab = tmpTab;
+    size *= 2;
 }
 
 // OPERATOR OVERLOADING
-
 template<typename T>
 Node<T> &BaseList<T>::operator[](const int &idx) {
+    if (idx >= size) { throw std::exception(); } // todo: custom exception
+
     return tab[idx];
+}
+
+template<typename T>
+std::ostream &operator<<(std::ostream &o, BaseList<T> &list) {
+    for (int i=0; i<list.count; i++){
+        o << list[i].getValue() << "\t";
+    }
+
+    return o;
 }
