@@ -35,10 +35,7 @@ void SkipList<T>::insert(T value) {
         this->count = level;
     } else {
         for (int i = 0; i < level; i++) {
-            this->tab[i].incrementCounter();
-            if (i < this->count && this->tab[i].getCounter() >= 2) {
-                this->tab[i] = newNode;
-            }
+            this->tab[i] = newNode;
         }
     }
 }
@@ -47,7 +44,6 @@ template<typename T>
 bool SkipList<T>::search(T value) {
     for (int i = 0; i < this->count; i++) {
         if (this->tab[i].getValue() == value) {
-            this->tab[i].incrementCounter();
             return true;
         }
     }
