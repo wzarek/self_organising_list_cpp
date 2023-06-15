@@ -11,7 +11,7 @@ class SelfOrganisingList : public BaseList<T>{
 public:
     explicit SelfOrganisingList(int _size);
 
-    void reorganiseUp(const int& idx);
+    int reorganiseUp(const int& idx);
 
     // overriding
     bool search(T value);
